@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestServer", "RestServer\RestServer.csproj", "{28311D20-6FA9-4613-9186-508515DDA0BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherLibrary", "..\ConsoleApp1\WeatherLibrary\WeatherLibrary.csproj", "{4165384A-F5F8-44B4-A408-BD48D1B612C4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28311D20-6FA9-4613-9186-508515DDA0BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28311D20-6FA9-4613-9186-508515DDA0BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28311D20-6FA9-4613-9186-508515DDA0BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28311D20-6FA9-4613-9186-508515DDA0BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4165384A-F5F8-44B4-A408-BD48D1B612C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4165384A-F5F8-44B4-A408-BD48D1B612C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4165384A-F5F8-44B4-A408-BD48D1B612C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4165384A-F5F8-44B4-A408-BD48D1B612C4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
