@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\ConsoleApp1\WeatherLibrary\WeatherLibrary.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.3" />
+      <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="5.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
+    </ItemGroup>
+
+</Project>

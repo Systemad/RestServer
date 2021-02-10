@@ -8,6 +8,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WeatherLibrary;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using Microsoft.Data.Sqlite;
+using System.Data;
+using System.IO;
+using DatabaseLibrary.SQL;
+using Testing;
 
 namespace RestServer.Controllers
 {
@@ -27,6 +34,7 @@ namespace RestServer.Controllers
         {
             _logger = logger;
         }
+        
 
         [HttpGet]
         [Route("Weather")]
@@ -42,18 +50,23 @@ namespace RestServer.Controllers
             return list;
         }
 
-        
+
         [HttpPost]
-        public IEnumerable<WeatherModel> Post([FromForm]string data, [FromQuery]int data2)
+        public IEnumerable<WeatherModel> Post([FromForm] string summary, [FromQuery] int temp)
         {
-            var a = new WeatherModel();
-            a.Date = DateTime.Now;
-            a.Summary = data;
-            a.TemperatureC = data2;
-            var list = new List<WeatherModel>();
-            list.Add(a);
-            return list;
+            using (var db = new WeatherContext())
+            {
+                db.Database.EnsureCreated();
+                var weather = new WeatherModel
+                {
+                    Id = 1,
+                    TemperatureC = temp,
+                    Date = DateTime.Now,
+                    Summary = summary
+                };
+                db.Weathers.Add(weather);
+                db.SaveChanges();
+            }
         }
-        
     }
 }
