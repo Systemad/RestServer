@@ -39,19 +39,15 @@ namespace RestServer.Controllers
         [HttpGet]
         [Route("WeatherAll")]
         [Produces("application/json")]
-        public IEnumerable<WeatherModel> GetAllWeather()
+        public List<WeatherModel> GetAllWeather()
         {
-            // TODO: Get all weather
-            var list = new List<WeatherModel>();
             using (var db = new WeatherContext())
             {
                 Console.WriteLine("Querying for a blog");
-                var weather = db.Weathers
-                    .OrderBy(b => b.Id)
-                    .First();
-                list.Add(weather);
+                var list = db.Weathers
+                    .ToList();
+                return list;
             }
-            return list;
         }
         
         [HttpGet]
