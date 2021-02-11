@@ -52,22 +52,21 @@ namespace RestServer.Controllers
 
 
         [HttpPost]
-        public void Post([FromForm] string summary, [FromQuery] int temp)
+        public void PostWeather([FromForm] string summary, [FromQuery] int temp)
         {
             using (var db = new WeatherContext())
             {
                 db.Database.EnsureCreated();
-                var weather = new WeatherModel
+                db.Weathers.Add(new WeatherModel
                 {
-                    Id = 2,
+                    Id = 3,
                     TemperatureC = temp,
                     Date = DateTime.Now,
                     Summary = summary
-                };
-                db.Weathers.Add(weather);
+                });
+                //db.Weathers.Add(weather);
                 db.SaveChanges();
             }
-            //Console.WriteLine(DbContext.);
         }
     }
 }
