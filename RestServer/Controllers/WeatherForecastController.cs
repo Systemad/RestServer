@@ -37,19 +37,51 @@ namespace RestServer.Controllers
         
 
         [HttpGet]
-        [Route("Weather")]
+        [Route("WeatherAll")]
         [Produces("application/json")]
-        public IEnumerable<WeatherModel>  GetWeather([FromQuery]string summary, int temp) 
+        public IEnumerable<WeatherModel> GetAllWeather()
         {
-            var a = new WeatherModel();
-            a.Date = DateTime.Now;
-            a.Summary = summary;
-            a.TemperatureC = temp;
+            // TODO: Get all weather
             var list = new List<WeatherModel>();
-            list.Add(a);
+            using (var db = new WeatherContext())
+            {
+                Console.WriteLine("Querying for a blog");
+                var weather = db.Weathers
+                    .OrderBy(b => b.Id)
+                    .First();
+                list.Add(weather);
+            }
             return list;
         }
-
+        
+        [HttpGet]
+        [Route("WeatherTest")]
+        [Produces("application/json")]
+        public WeatherModel GetLatestWeather()
+        {
+            using (var db = new WeatherContext())
+            {
+                Console.WriteLine("Querying for a blog");
+                var weather = db.Weathers
+                    .OrderBy(b => b.Id)
+                    .First();
+                return weather;
+            }
+        }
+        
+        [HttpGet]
+        [Route("WeatherById")]
+        [Produces("application/json")]
+        public WeatherModel GetWeatherById([FromQuery] int temp)
+        {
+            using (var db = new WeatherContext())
+            {
+                Console.WriteLine("Querying for a blog");
+                var weather = db.Weathers
+                    .FirstOrDefault(b => b.Id == temp);
+                return weather;
+            }
+        }
 
         [HttpPost]
         public void PostWeather([FromForm] string summary, [FromQuery] int temp)
@@ -59,12 +91,10 @@ namespace RestServer.Controllers
                 db.Database.EnsureCreated();
                 db.Weathers.Add(new WeatherModel
                 {
-                    //Id = 3,
                     TemperatureC = temp,
                     Date = DateTime.Now,
                     Summary = summary
                 });
-                //db.Weathers.Add(weather);
                 db.SaveChanges();
             }
         }
