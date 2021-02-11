@@ -52,14 +52,14 @@ namespace RestServer.Controllers
 
 
         [HttpPost]
-        public IEnumerable<WeatherModel> Post([FromForm] string summary, [FromQuery] int temp)
+        public void Post([FromForm] string summary, [FromQuery] int temp)
         {
             using (var db = new WeatherContext())
             {
                 db.Database.EnsureCreated();
                 var weather = new WeatherModel
                 {
-                    Id = 1,
+                    Id = 2,
                     TemperatureC = temp,
                     Date = DateTime.Now,
                     Summary = summary
@@ -67,6 +67,7 @@ namespace RestServer.Controllers
                 db.Weathers.Add(weather);
                 db.SaveChanges();
             }
+            //Console.WriteLine(DbContext.);
         }
     }
 }
