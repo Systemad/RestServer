@@ -37,7 +37,7 @@ namespace RestServer.Controllers
         
 
         [HttpGet]
-        [Route("WeatherAll")]
+        [Route("api/WeatherAll")]
         [Produces("application/json")]
         public List<WeatherModel> GetAllWeather()
         {
@@ -51,7 +51,7 @@ namespace RestServer.Controllers
         }
         
         [HttpGet]
-        [Route("WeatherTest")]
+        [Route("api/WeatherTest")]
         [Produces("application/json")]
         public WeatherModel GetLatestWeather()
         {
@@ -66,20 +66,38 @@ namespace RestServer.Controllers
         }
         
         [HttpGet]
-        [Route("WeatherById")]
+        [Route("api/WeatherById")]
         [Produces("application/json")]
-        public WeatherModel GetWeatherById([FromQuery] int temp)
+        public WeatherModel GetWeatherById([FromQuery] int id)
         {
             using (var db = new WeatherContext())
             {
                 Console.WriteLine("Querying for a blog");
                 var weather = db.Weathers
-                    .FirstOrDefault(b => b.Id == temp);
+                    .FirstOrDefault(b => b.Id == id);
                 return weather;
+            }
+        }
+        
+        [HttpGet]
+        [Route("api/DeleteWeatherById")]
+        [Produces("application/json")]
+        public void DeleteWeatherByid([FromQuery] int id)
+        {
+            using (var db = new WeatherContext())
+            {
+                var weather = db.Weathers.SingleOrDefault(b => b.Id == id);
+
+                if(weather != null)
+                {
+                    db.Weathers.Remove(weather);
+                    db.SaveChanges();
+                }
             }
         }
 
         [HttpPost]
+        [Route("api/AddWeather")]
         public void PostWeather([FromForm] string summary, [FromQuery] int temp)
         {
             using (var db = new WeatherContext())
