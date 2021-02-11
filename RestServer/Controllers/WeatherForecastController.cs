@@ -59,7 +59,7 @@ namespace RestServer.Controllers
                 db.Database.EnsureCreated();
                 db.Weathers.Add(new WeatherModel
                 {
-                    Id = 3,
+                    //Id = 3,
                     TemperatureC = temp,
                     Date = DateTime.Now,
                     Summary = summary
