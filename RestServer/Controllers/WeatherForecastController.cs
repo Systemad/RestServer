@@ -14,6 +14,7 @@ using Microsoft.Data.Sqlite;
 using System.Data;
 using System.IO;
 using DatabaseLibrary.SQL;
+using WeatherLibrary.Model;
 
 namespace RestServer.Controllers
 {
@@ -32,12 +33,12 @@ namespace RestServer.Controllers
         // /api/WeatherForecast/WeatherAll
         [HttpGet]
         [Route("WeatherAll")]
-        public List<WeatherModel> GetAllWeather()
+        public List<WeatherDay> GetAllWeather()
         {
             using (var db = new WeatherContext())
             {
                 Console.WriteLine("Querying for a blog");
-                var list = db.Weathers
+                var list = db.WeathersDays
                     .ToList();
                 return list;
             }
@@ -46,13 +47,13 @@ namespace RestServer.Controllers
         // /api/WeatherForecast/WeatherById/{id}
         [HttpGet]
         [Route("WeatherById/{id}")]
-        public WeatherModel GetWeatherById([FromQuery] int id)
+        public WeatherDay GetWeatherById(int id)
         {
             using (var db = new WeatherContext())
             {
                 Console.WriteLine("Querying for a blog");
-                var weather = db.Weathers
-                    .FirstOrDefault(b => b.Id == id);
+                var weather = db.WeathersDays
+                    .FirstOrDefault(b => b.WeatherDayId == id);
                 return weather;
             }
         }
@@ -64,29 +65,33 @@ namespace RestServer.Controllers
         {
             using (var db = new WeatherContext())
             {
-                var weather = db.Weathers.Single(b => b.Id == id);
+                var weather = db.WeathersDays.Single(b => b.WeatherDayId == id);
                 
                 if(weather != null)
                 {
-                    db.Weathers.Remove(weather);
+                    db.WeathersDays.Remove(weather);
                     db.SaveChanges();
                 }
             }
         }
         
-        // /api/WeatherForecast/api/AddWeather
+        // /api/WeatherForecast/AddWeather
         [HttpPost]
         [Route("api/AddWeather")]
-        public void PostWeather([FromForm] string summary, [FromQuery] int temp)
+        public void PostWeather(string summary, int temp)
         {
             using (var db = new WeatherContext())
             {
-                db.Database.EnsureCreated();
-                db.Weathers.Add(new WeatherModel
+                //db.Database.EnsureCreated();
+                db.WeathersDays.Add(new WeatherDay
                 {
-                    TemperatureC = temp,
+                    Temperature = temp,
                     Date = DateTime.Now,
-                    Summary = summary
+                    WeekDay = summary,
+                    WeatherWeek = new WeatherWeek()
+                    {
+                        WeekId = 1
+                    }
                 });
                 db.SaveChanges();
             }
