@@ -14,6 +14,7 @@ using Microsoft.Data.Sqlite;
 using System.Data;
 using System.IO;
 using DatabaseLibrary.SQL;
+using WeatherLibrary.Model;
 
 namespace RestServer.Controllers
 {
@@ -32,7 +33,7 @@ namespace RestServer.Controllers
         // /api/WeatherForecast/WeatherAll
         [HttpGet]
         [Route("WeatherAll")]
-        public List<WeatherModel> GetAllWeather()
+        public List<WeatherDay> GetAllWeather()
         {
             using (var db = new WeatherContext())
             {
@@ -46,13 +47,13 @@ namespace RestServer.Controllers
         // /api/WeatherForecast/WeatherById/{id}
         [HttpGet]
         [Route("WeatherById/{id}")]
-        public WeatherModel GetWeatherById([FromQuery] int id)
+        public WeatherDay GetWeatherById(int id)
         {
             using (var db = new WeatherContext())
             {
                 Console.WriteLine("Querying for a blog");
                 var weather = db.Weathers
-                    .FirstOrDefault(b => b.Id == id);
+                    .FirstOrDefault(b => b.WeatherDayId == id);
                 return weather;
             }
         }
@@ -64,7 +65,7 @@ namespace RestServer.Controllers
         {
             using (var db = new WeatherContext())
             {
-                var weather = db.Weathers.Single(b => b.Id == id);
+                var weather = db.Weathers.Single(b => b.WeatherDayId == id);
                 
                 if(weather != null)
                 {
@@ -82,11 +83,11 @@ namespace RestServer.Controllers
             using (var db = new WeatherContext())
             {
                 db.Database.EnsureCreated();
-                db.Weathers.Add(new WeatherModel
+                db.Weathers.Add(new WeatherDay
                 {
-                    TemperatureC = temp,
+                    Temperature = temp,
                     Date = DateTime.Now,
-                    Summary = summary
+                    WeekDay = "Wednesday"
                 });
                 db.SaveChanges();
             }

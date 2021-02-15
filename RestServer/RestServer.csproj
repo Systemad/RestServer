@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="JWT" Version="8.1.0-beta1" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.3" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="5.0.3" />
@@ -15,6 +16,10 @@
       <ProjectReference Include="..\..\ConsoleApp1\WeatherLibrary\WeatherLibrary.csproj" />
       <ProjectReference Include="..\DatabaseLibrary\DatabaseLibrary.csproj" />
       <ProjectReference Include="..\Testing\Testing.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Controllers\TokenController.cs" />
     </ItemGroup>
 
 </Project>
