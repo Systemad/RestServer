@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -40,6 +41,7 @@ namespace RestServer.Controllers
 
         [Authorize]
         [HttpGet]
+        [Route("getusers")]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();

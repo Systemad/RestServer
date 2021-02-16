@@ -75,7 +75,7 @@ namespace RestServer.Controllers
             }
         }
         
-        // /api/WeatherForecast/api/AddWeather
+        // /api/WeatherForecast/AddWeather
         [HttpPost]
         [Route("api/AddWeather")]
         public void PostWeather([FromForm] string summary, [FromQuery] int temp)

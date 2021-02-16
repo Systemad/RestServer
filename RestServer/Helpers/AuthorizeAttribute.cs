@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 using WeatherLibrary.Model;
 
-
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class AuthorizeAttribute : Attribute, IAuthorizationFilter
 {
