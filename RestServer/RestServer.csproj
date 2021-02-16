@@ -18,8 +18,4 @@
       <ProjectReference Include="..\Testing\Testing.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Compile Remove="Controllers\TokenController.cs" />
-    </ItemGroup>
-
 </Project>

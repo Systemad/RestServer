@@ -22,7 +22,7 @@ namespace RestServer
                 {
                     webBuilder.UseStartup<Startup>(); 
                     
-                    webBuilder.UseUrls("https://*:5001", "http://*:8080");
+                    webBuilder.UseUrls("https://*:5001", "http://*:8080", "http://localhost:4000");
                 });
     }
 }
